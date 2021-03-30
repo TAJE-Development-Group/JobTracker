@@ -1,19 +1,30 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
+import NavBar from './Components/Navbar.jsx'
+import { context } from './Context/context';
 
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
+const App = () => {
+  const [globalState, setGlobalState] = useState();
+  
+  // useEffect(() => {
+  //   // fetch
+
+  //   //-->
+  //   // setGlobalState(whatever we get back)
+  // })
+
+  const state = {
+    globalState,
+    setGlobalState
   }
 
-  render() {
-    return (
-      <div>
-        Hello world
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <context.Provider value = { state }>
+      <NavBar />
+      </context.Provider>
+    </div>
+  );
+};
 
 export default App;
