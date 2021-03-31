@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import TextField from '@material-ui/core/TextField';
+import { useForm } from "react-hook-form";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,6 +30,8 @@ const useStyles = makeStyles((theme) => ({
 export default function NavBar() {
   const classes = useStyles();
 
+  
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -41,8 +44,8 @@ export default function NavBar() {
           </Typography>
           <form className={classes.emptyField} noValidate autoComplete="off">
             <TextField id="outlined-basic" label="Enter Company Name" variant="outlined" />
+            <Button color="inherit">Add Company</Button>
           </form>
-          <Button color="inherit">Add Company</Button>
         </Toolbar>
       </AppBar>
     </div>

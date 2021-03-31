@@ -1,5 +1,6 @@
 import React, { Component, useState } from 'react';
 import NavBar from './Components/Navbar.jsx'
+import CompanyList from './Components/CompanyListItem.jsx'
 import { context } from './Context/context';
 
 
@@ -7,10 +8,10 @@ const App = () => {
   const [globalState, setGlobalState] = useState();
   
   // useEffect(() => {
-  //   // fetch
+  //   fetch
 
-  //   //-->
-  //   // setGlobalState(whatever we get back)
+  //   -->
+  //  setGlobalState(whatever we get back)
   // })
 
   const state = {
@@ -22,6 +23,7 @@ const App = () => {
     <div>
       <context.Provider value = { state }>
       <NavBar />
+      <CompanyList />
       </context.Provider>
     </div>
   );
