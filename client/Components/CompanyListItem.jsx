@@ -7,6 +7,8 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import TechStack from './TechStack.jsx'
+import ProgressBar from './ProgressBar/ProgressBar.jsx'
+import { context } from '../Context/context.js'
 
   // dummy functions to be deleted
 
@@ -70,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
-    flexBasis: '33.33%',
+    // flexBasis: '33.33%',
     flexShrink: 0,
   },
   secondaryHeading: {
@@ -78,6 +80,71 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
   },
 }));
+
+// const { globalState } = useContext(context)
+// const companyAccordianArray = []
+// for(let i = 0; i < globalState.length; i++){
+//   companyAccordianArray.push(
+//   <div className={classes.root}>
+//     <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+//       <AccordionSummary
+//         expandIcon={<ExpandMoreIcon />}
+//         aria-controls="expandIcon"
+//         id="panel1bh-header"
+//       >
+//           {/* Conditionally render company name */}
+//         <div>
+//           {/* <Typography className={classes.heading}>Company Name</Typography> */}
+//           <h2>COMPANY NAME</h2>
+//         </div>
+//         {/* progress bar */}
+//         <div style={{width: '100%'}}>
+//           <ProgressBar index={i}/>
+//         </div>
+//         {/* <Typography className={classes.secondaryHeading}>Location of Progress Bar</Typography> */}
+//         {/* <ExpandMoreIcon /> */}
+//       </AccordionSummary>
+
+//       <AccordionDetails>
+//       <Router>
+//     <div>
+//       <ul>
+//         <li>
+//           <Link to="/contacts">Contacts</Link>
+//         </li>
+//         <li>
+//           <Link to="/techStack">Tech Stack</Link>
+//         </li>
+//         <li>
+//           <Link to="/notes">Notes</Link>
+//         </li>
+//         <li>
+//           <Link to="/toDo">To-Do</Link>
+//         </li>
+//       </ul>
+
+//       <hr />
+
+//       <Switch>
+//         <Route path="/contacts">
+//           <Contacts />
+//         </Route>
+//         <Route path="/techStack">
+//           <TechStack />
+//         </Route>
+//         <Route path="/notes">
+//           <Notes />
+//         </Route>
+//         <Route path="/toDo">
+//           <ToDo />
+//         </Route>
+//       </Switch>
+//     </div>
+//   </Router>
+//       </AccordionDetails>
+//     </Accordion>
+//   </div>)
+// }
 
 export default function ControlledAccordions() {
   const classes = useStyles();
@@ -88,64 +155,65 @@ export default function ControlledAccordions() {
   };
 
   return (
-    <div className={classes.root}>
-      <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1bh-content"
-          id="panel1bh-header"
-        >
-            {/* Conditionally render company name */}
-          <Typography className={classes.heading}>Company Name</Typography>
-          {/* progress bar */}
-          <Typography className={classes.secondaryHeading}>Location of Progress Bar</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-        <Router>
-      <div>
-        <ul>
-          <li>
-            <Link to="/contacts">Contacts</Link>
-          </li>
-          <li>
-            <Link to="/techStack">Tech Stack</Link>
-          </li>
-          <li>
-            <Link to="/notes">Notes</Link>
-          </li>
-          <li>
-            <Link to="/toDo">To-Do</Link>
-          </li>
-        </ul>
+      <div className={classes.root}>
+    <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+      <AccordionSummary
+        expandIcon={<ExpandMoreIcon />}
+        aria-controls="expandIcon"
+        id="panel1bh-header"
+      >
+          {/* Conditionally render company name */}
+        <div>
+          {/* <Typography className={classes.heading}>Company Name</Typography> */}
+          <h2>COMPANY NAME</h2>
+        </div>
+        {/* progress bar */}
+        <div style={{width: '100%'}}>
+          <ProgressBar />
+        </div>
+        {/* <Typography className={classes.secondaryHeading}>Location of Progress Bar</Typography> */}
+        {/* <ExpandMoreIcon /> */}
+      </AccordionSummary>
 
-        <hr />
+      <AccordionDetails>
+      <Router>
+    <div>
+      <ul>
+        <li>
+          <Link to="/contacts">Contacts</Link>
+        </li>
+        <li>
+          <Link to="/techStack">Tech Stack</Link>
+        </li>
+        <li>
+          <Link to="/notes">Notes</Link>
+        </li>
+        <li>
+          <Link to="/toDo">To-Do</Link>
+        </li>
+      </ul>
 
-        {/*
-          A <Switch> looks through all its children <Route>
-          elements and renders the first one whose path
-          matches the current URL. Use a <Switch> any time
-          you have multiple routes, but you want only one
-          of them to render at a time
-        */}
-        <Switch>
-          <Route path="/contacts">
-            <Contacts />
-          </Route>
-          <Route path="/techStack">
-            <TechStack />
-          </Route>
-          <Route path="/notes">
-            <Notes />
-          </Route>
-          <Route path="/toDo">
-            <ToDo />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
-        </AccordionDetails>
-      </Accordion>
+      <hr />
+
+      <Switch>
+        <Route path="/contacts">
+          <Contacts />
+        </Route>
+        <Route path="/techStack">
+          <TechStack />
+        </Route>
+        <Route path="/notes">
+          <Notes />
+        </Route>
+        <Route path="/toDo">
+          <ToDo />
+        </Route>
+      </Switch>
     </div>
+  </Router>
+      </AccordionDetails>
+    </Accordion>
+  </div>
   );
 };
 
