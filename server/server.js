@@ -1,7 +1,14 @@
 const express = require('express');
+const { createConnection } = require('net');
 const path = require('path');
 const PORT = 3000;
 const app = express();
+const apiRouter = require('./routes/api.js');
+
+/**
+ * Authors: Adrian-Inza Cruz, Taylor Davis
+ * Index Server File
+ */
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -14,6 +21,9 @@ app.use('/build', express.static(path.resolve(__dirname, '../build')));
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../index.html'));
 });
+
+//API ROUTER IN ROUTES FOLDER
+app.use('/api', apiRouter);
 
 app.use((req, res) => res.status(404).send('This is not the page you\'re looking for...'));
 
@@ -29,7 +39,7 @@ app.use((err, req, res, next) => {
   return res.status(errorObj.status).json(errorObj.message);
 });
 
-app.listen(PORT, () => { 
+app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}...`);
 });
 
