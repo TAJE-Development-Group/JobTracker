@@ -22,7 +22,7 @@ jobsController.getJobs = (req, res, next) => {
 };
 
 jobsController.postJob = (req, res, next) => {
-  console.log('postInfo');
+  console.log('postInfo', req.body);
   const { company_name, location, tech, notes, contact, progress } = req.body;
   const queryStr = `INSERT INTO jobs VALUES ('${company_name}', '${location}','${contact}','${tech}', '${notes}', '${progress}') RETURNING *`;
 
@@ -35,9 +35,9 @@ jobsController.postJob = (req, res, next) => {
     .catch((err) => next(err));
 };
 
-jobsController.updateInfo = (req, res, next) => {
-  const { location, note, tech, progress, companyName } = req.body;
-  const queryStr = `update jobs set location = '${location}', notes = '${note}', tech = '${tech}', progress = ${progress} WHERE company_name = '${companyName}' RETURNING *`;
+jobsController.updateProgress = (req, res, next) => {
+  const { progress, company_name } = req.body;
+  const queryStr = `update jobs set progress = ${progress} WHERE company_name = '${company_name}' RETURNING *`;
 
   db.query(queryStr)
     .then((update) => { 

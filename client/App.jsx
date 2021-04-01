@@ -3,6 +3,7 @@ import NavBar from './Components/Navbar.jsx'
 import CompanyList from './Components/CompanyListItem.jsx'
 import ProgressBar from './Components/ProgressBar/ProgressBar.jsx'
 import { context } from './Context/context';
+import './index.css';
 
 
 const App = () => {

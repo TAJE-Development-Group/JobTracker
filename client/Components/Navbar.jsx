@@ -13,17 +13,21 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
   title: {
-    flexGrow: 1,
+    flexGrow: 3,
+    color: '#F8F8FF',
+    fontWeight: '500',
+    fontSize: '2em',
+    fontFamily: 'Cabin, sans-serif',
   },
   emptyField: {
     '& > *': {
       margin: theme.spacing(1),
       width: '25ch',
     },
+  },
+  navbar: {
+    backgroundColor: '#3873F6',
   }
 }));
 
@@ -35,36 +39,36 @@ export default function NavBar({props}) {
   
 
   function onSubmit(data) {
-   // Name, Position, Email, Phone, LinkedIn
-  //  setNavState(data);
-  //  const {companyName, contact, techStack, note, todo} = data;
-  // fetch('/api/jobs', {
-  //   method: 'POST', 
-  //   headers: {'ContentType': 'application/json'}, 
-  //   body: JSON.stringify({
-  //     company_name, 
-  //     location, 
-  //     tech,
-  //     notes,
-  //     progress
-  //   })
-  // })
-  // .then(job => job.json())
-  // .then(job => {
-  //   console.log(job); 
+    const { company_name, location, contact, tech, notes } = data;
+    data.progress = 0;
     setGlobalState(oldJobs => [...oldJobs, data]);
-  // })
-  // .catch(err => console.log(err)); 
+  fetch('/api/jobs', {
+    method: 'POST', 
+    headers: { 
+      'content-type' : 'application/json'
+    },
+    body: JSON.stringify({
+      company_name,
+      location, 
+      tech,
+      notes,
+      contact,
+      progress: 0,
+    })
+  })
+  .then(job => job.json())
+  .then(job => {
+    console.log(job); 
+    return;
+  })
+  .catch(err => console.log(err)); 
 
   };
   // <input placeholder="Name" type="text" ref={register} name="Name"/>
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" className={classes.navbar}>
         <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
           <Typography variant="h6" className={classes.title}>
             Software Developer Job Tracker by TAJE
           </Typography>
@@ -72,14 +76,13 @@ export default function NavBar({props}) {
         <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
         <fieldset>
           <label>
-            <p>New Job</p>
-            <input placeholder="Company Name" type="text" ref={register} name="company_name"/> 
-            <input placeholder="Location" type="text" ref={register} name="location"/>
-            <input placeholder="Contact" type="text" ref={register} name="contact"/>
-            <input placeholder="Tech Stack" type="text" ref={register} name="tech"/>
-            <input placeholder="Note" type="text" ref={register} name="notes"/>
+            <input className='text-box' placeholder="Company Name" type="text" ref={register} name="company_name"/> 
+            <input className='text-box' placeholder="Location" type="text" ref={register} name="location"/>
+            <input className='text-box' placeholder="Contact" type="text" ref={register} name="contact"/>
+            <input className='text-box' placeholder="Tech Stack" type="text" ref={register} name="tech"/>
+            <input className='text-box' placeholder="Note" type="text" ref={register} name="notes"/>
           </label>
-            <Button type="submit" color="inherit">Add Company</Button>
+            <Button className='add-company' type="submit" color="inherit">Add Company</Button>
         </fieldset>
           </form>
         </Toolbar>

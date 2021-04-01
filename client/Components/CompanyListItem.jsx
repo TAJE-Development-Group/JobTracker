@@ -77,24 +77,22 @@ export default function ControlledAccordions({props}) {
   const companyAccordianArray = []
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
-
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-  // const jobs = () => {
+
     if (globalState !== undefined){
       for(let i = 0; i < globalState.length; i++) {
-        // const [contact, useContact] = useState(globalState[i].contact)
         companyAccordianArray.push( 
     <div className={classes.root} key={`key${i}`}>
   <Accordion expanded={expanded === `panel${i+1}`} onChange={handleChange(`panel${i+1}`)}>
     <AccordionSummary
       expandIcon={<ExpandMoreIcon />}
-      aria-controls="expandIcon"
+      aria-controls="panel1bh-content"
       id="panel1bh-header"
       >
         {/* Conditionally render company name */}
-      <div>
+      <div className='company-name'>
         {/* <Typography className={classes.heading}>Company Name</Typography> */}
         <h2>{globalState[i].company_name}</h2>
       </div>
@@ -108,18 +106,18 @@ export default function ControlledAccordions({props}) {
 
     <AccordionDetails >
     <Router>
-  <div>
-    <ul>
-      <li>
+  <div className='data-links-container'>
+    <ul className='data-links'>
+      <li className='links'>
         <Link to="/contacts">Contacts</Link>
       </li>
-      <li>
+      <li className='links'>
         <Link to="/techStack">Tech Stack</Link>
       </li>
-      <li>
+      <li className='links'>
         <Link to="/notes">Notes</Link>
       </li>
-      <li>
+      <li className='links'>
         <Link to="/location">Location</Link>
       </li>
     </ul>
