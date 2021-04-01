@@ -85,8 +85,8 @@ export default function ControlledAccordions({props}) {
     if (globalState !== undefined){
       for(let i = 0; i < globalState.length; i++) {
         // const [contact, useContact] = useState(globalState[i].contact)
-        companyAccordianArray.push(
-    <div className={classes.root}>
+        companyAccordianArray.push( 
+    <div className={classes.root} key={`key${i}`}>
   <Accordion expanded={expanded === `panel${i+1}`} onChange={handleChange(`panel${i+1}`)}>
     <AccordionSummary
       expandIcon={<ExpandMoreIcon />}
