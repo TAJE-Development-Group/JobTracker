@@ -1,22 +1,49 @@
+import { names } from 'debug';
 import React, { Component, useState } from 'react';
 import { useForm } from "react-hook-form";
 
-function ContactForm () {
+export default function ContactForm () {
   const {register, handleSubmit} = useForm();
-  const { contact, setContact } = useContext();
+  const [ contact, setContact] = useState([{Name: 'personA'}, {Name: 'personB'}]);
   
-  const onSubmit = (data) => {
+  function onSubmit(data) {
     // set state
+    let oldContact = contact
+    oldContact.push(data)
+    setContact(oldContact)
     // but also call the renderSubmit function passing in data
   };
+  const contactArray = []
+  for(let i = 0; i < contact.length; i++){
+    contactArray.push(
+      //basically the want the style of the renderSubmit inside this for loop to dynamically render multiple components of the "render sumbit"
+      // <RenderSubmit props={data}/>
+      <div>
+      <div>Name: 
+        {contact[i].Name}
+      </div>
+      <div>Position: 
+        {contact[i].position}
+      </div>
+      <div>Email: 
+        {contact[i].email}
+      </div>
+      <div>Phone Number: 
+        {contact[i].phone}
+      </div>
+      <div>LinkedIn: 
+        {contact[i].linkedin}
+      </div>
+    </div>
+    )
+  }
 
   return (
     <div>
-      <form onSubmit={handleSubmit()} autoComplete="off">
+      <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
         <fieldset>
           <label>
             <p>New Contact</p>
-            {/* label instead of name? */}
             <input type="text" ref={register} name="Name"/> 
             <input type="text" ref={register} name="Position"/>
             <input type="text" ref={register} name="Email"/>
@@ -31,26 +58,4 @@ function ContactForm () {
   );
 };
 
-function renderSubmit (data) {
-  
-  return (
-    <div>
-      <div>Name: 
-        {data.name}
-      </div>
-      <div>Position: 
-        {data.position}
-      </div>
-      <div>Email: 
-        {data.email}
-      </div>
-      <div>Phone Number: 
-        {data.phone}
-      </div>
-      <div>LinkedIn: 
-        {data.linkedin}
-      </div>
-    </div>
-  );
-};
 
