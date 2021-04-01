@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Cabin&display=swap');
+
+body {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Cabin', 'sans-serif';
+}
+
+fieldset {
+  border: none;
+}
+
+.company-name {
+  margin-top: 1.5em;
+}
+
+.add-company {
+  /* background-color: #8fc9fa !important; */
+  background-color: #9a0e1a !important;
+}
+
+.text-box {
+  border: 3px outset #e8eaf3;
+  outline: 0;
+  height: 25px;
+  margin: 0 0.5em;
+}
+
+.data-links {
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+}
+
+.data-links .links {
+  margin: 1em;
+}
+
+.data-links-container {
+  width: 100%;
+}
+
+.links a {
+  background-color: #9a0e1a;
+  color: #ffff;
+  font-size: 1.111rem;
+  letter-spacing: 0em;
+  line-height: 1.2;
+  font-weight: 400;
+  text-transform: uppercase;
+  z-index: 1;
+  padding: 0.7em 2em;
+  transition: color 0.5s ease 0s;
+  border-radius: 5px;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+}

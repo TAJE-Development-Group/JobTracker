@@ -94,7 +94,7 @@ export default function ControlledAccordions({props}) {
       id="panel1bh-header"
       >
         {/* Conditionally render company name */}
-      <div>
+      <div className='company-name'>
         {/* <Typography className={classes.heading}>Company Name</Typography> */}
         <h2>{globalState[i].company_name}</h2>
       </div>
@@ -108,18 +108,18 @@ export default function ControlledAccordions({props}) {
 
     <AccordionDetails >
     <Router>
-  <div>
-    <ul>
-      <li>
+  <div className='data-links-container'>
+    <ul className='data-links'>
+      <li className='links'>
         <Link to="/contacts">Contacts</Link>
       </li>
-      <li>
+      <li className='links'>
         <Link to="/techStack">Tech Stack</Link>
       </li>
-      <li>
+      <li className='links'>
         <Link to="/notes">Notes</Link>
       </li>
-      <li>
+      <li className='links'>
         <Link to="/location">Location</Link>
       </li>
     </ul>
