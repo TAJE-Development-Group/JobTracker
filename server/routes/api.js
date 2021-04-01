@@ -20,6 +20,6 @@ router.post('/contacts', contactsController.postContact, (req, res) => res.statu
 
 router.post('/todo', todoController.postTodo, (req, res) => res.status(200).send(res.locals.todo));
 
-router.patch('/jobs', jobsController.updateInfo, (req, res) => res.status(200).send(res.locals.info));
+router.patch('/jobs', jobsController.updateProgress, (req, res) => res.status(200).send(res.locals.job));
 
 module.exports = router;

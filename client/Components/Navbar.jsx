@@ -35,26 +35,29 @@ export default function NavBar({props}) {
   
 
   function onSubmit(data) {
-   // Name, Position, Email, Phone, LinkedIn
-  //  setNavState(data);
-  //  const {companyName, contact, techStack, note, todo} = data;
-  // fetch('/api/jobs', {
-  //   method: 'POST', 
-  //   headers: {'ContentType': 'application/json'}, 
-  //   body: JSON.stringify({
-  //     company_name, 
-  //     location, 
-  //     tech,
-  //     notes,
-  //     progress
-  //   })
-  // })
-  // .then(job => job.json())
-  // .then(job => {
-  //   console.log(job); 
+    const { company_name, location, contact, tech, notes } = data;
+    data.progress = 0;
     setGlobalState(oldJobs => [...oldJobs, data]);
-  // })
-  // .catch(err => console.log(err)); 
+  fetch('/api/jobs', {
+    method: 'POST', 
+    headers: { 
+      'content-type' : 'application/json'
+    },
+    body: JSON.stringify({
+      company_name,
+      location, 
+      tech,
+      notes,
+      contact,
+      progress: 0,
+    })
+  })
+  .then(job => job.json())
+  .then(job => {
+    console.log(job); 
+    return;
+  })
+  .catch(err => console.log(err)); 
 
   };
   // <input placeholder="Name" type="text" ref={register} name="Name"/>

@@ -17,9 +17,6 @@ const step6Content = <h1>Negotiations</h1>;
 const step7Content = <h1>Accepted</h1>;
 
 // setup step validators, will be called before proceeding to the next step
-function Validator() {
-  return true
-}
 
 function step3Validator() {
   // return a boolean
@@ -34,14 +31,36 @@ function onFormSubmit() {
 // render the progress bar
 export default function ProgressBar ({props}) {
   // const { globalState, setGlobalState } = useContext(context)
-  // const [progress, setProgress] = useState(globalState[index][step])
-  const { progress } = props;
-
+  const { progress, company_name} = props;
+  const [step, setStep] = useState(progress);
   
+  function Validator() {
+    setStep(step + 1);
+    // console.log('step:', step); 
+    fetch('/api/jobs', {
+      method:'PATCH', 
+      headers: { 
+        'content-type' : 'application/json'
+      },
+      body: JSON.stringify({
+        progress: step, 
+        company_name,
+      }), 
+    })
+    .then(update => update.json())
+    .then(update => {
+      console.log(update);
+    })
+    .catch(err => console.log(err));
+    return true
+  };
+  // setStep(step + 1)
+  console.log('step:', step);
   return(
     <div>
             <StepProgressBar
-            startingStep={progress}
+            // onClick={() => console.log('worked')}
+            startingStep={step}
             onSubmit={onFormSubmit}
             steps={[
               {
@@ -49,48 +68,49 @@ export default function ProgressBar ({props}) {
                 // subtitle: '10%',
                 // name: 'step 1',
                 // content: step1Content
+                validator: Validator
                 },
                 {
                 label: 'Contacted/Interview Scheduled',
                 // subtitle: '50%',
                 // name: 'step 2',
                 // content: step2Content,
-                // validator: Validator
+                validator: Validator
                 },
                 {
                 label: 'Initial Interview',
                 // subtitle: '100%',
                 // name: 'step 3',
                 // content: step3Content,
-                // validator: Validator
+                validator: Validator
                 },
                 {
                   label: 'Further Interviews',
                   // subtitle: '50%',
                   // name: 'step 4',
                   // content: step4Content,
-                  // validator: Validator
+                  validator: Validator
                 },
                 {
                   label: 'Offer',
                   // subtitle: '50%',
                   // name: 'step 5',
                   // content: step5Content,
-                  // validator: Validator
+                  validator: Validator
                 },
                 {
                   label: 'Negotiations',
                   // subtitle: '50%',
                   // name: 'step 6',
                   // content: step6Content,
-                  // validator: Validator
+                  validator: Validator
                 },
                 {
                   label: 'Accepted',
                   // subtitle: '50%',
                   // name: 'step 7',
                   // content: step7Content,
-                  // validator: Validator
+                  validator: Validator
                 },
             ]}
             />
