@@ -9,7 +9,8 @@ if (process.env.NODE_ENV !== 'production') {
 }
 const { Pool } = require('pg');
 
-const PG_URI = `${process.env.DATABASE_URL}`;
+const PG_URI = `postgres://uhalzvve:HLjtTkchy5-BeRsdQDpJfxxoCKjwOhUC@kashin.db.elephantsql.com:5432/uhalzvve`
+// const PG_URI = `${process.env.DATABASE_URL}`;
 const pool = new Pool({
   connectionString: PG_URI,
 });
