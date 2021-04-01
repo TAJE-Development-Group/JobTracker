@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -27,11 +27,37 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function NavBar() {
+export default function NavBar({props}) {
   const classes = useStyles();
-
+  const {register, handleSubmit} = useForm();
+  const [navState, setNavState] = useState({});
+  const { globalState, setGlobalState } = props;
   
 
+  function onSubmit(data) {
+   // Name, Position, Email, Phone, LinkedIn
+  //  setNavState(data);
+  //  const {companyName, contact, techStack, note, todo} = data;
+  // fetch('/api/jobs', {
+  //   method: 'POST', 
+  //   headers: {'ContentType': 'application/json'}, 
+  //   body: JSON.stringify({
+  //     company_name, 
+  //     location, 
+  //     tech,
+  //     notes,
+  //     progress
+  //   })
+  // })
+  // .then(job => job.json())
+  // .then(job => {
+  //   console.log(job); 
+    setGlobalState(oldJobs => [...oldJobs, data]);
+  // })
+  // .catch(err => console.log(err)); 
+
+  };
+  // <input placeholder="Name" type="text" ref={register} name="Name"/>
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -42,9 +68,19 @@ export default function NavBar() {
           <Typography variant="h6" className={classes.title}>
             Software Developer Job Tracker by TAJE
           </Typography>
-          <form className={classes.emptyField} noValidate autoComplete="off">
-            <TextField id="outlined-basic" label="Enter Company Name" variant="outlined" />
-            <Button color="inherit">Add Company</Button>
+          {/* <div> */}
+        <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
+        <fieldset>
+          <label>
+            <p>New Job</p>
+            <input placeholder="Company Name" type="text" ref={register} name="company_name"/> 
+            <input placeholder="Location" type="text" ref={register} name="location"/>
+            <input placeholder="Contact" type="text" ref={register} name="contact"/>
+            <input placeholder="Tech Stack" type="text" ref={register} name="tech"/>
+            <input placeholder="Note" type="text" ref={register} name="notes"/>
+          </label>
+            <Button type="submit" color="inherit">Add Company</Button>
+        </fieldset>
           </form>
         </Toolbar>
       </AppBar>

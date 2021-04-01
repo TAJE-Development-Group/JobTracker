@@ -1,75 +1,57 @@
+import { names } from 'debug';
 import React, { useState, useEffect, useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
+import { context } from '../Context/context.js';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import TechStack from './TechStack.jsx'
-import Contacts from './Contacts.jsx'
-import ProgressBar from './ProgressBar/ProgressBar.jsx'
-import { context } from '../Context/context.js'
+import ProgressBar from './ProgressBar/ProgressBar.jsx';
+import Contacts from './Contacts.jsx';
+import TechStack from './TechStack.jsx';
+import Location from './location.jsx';
+import Notes from './notes.jsx'; 
 
-  // dummy functions to be deleted
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+
+// imt Typo[raphy from '@materia]li/corSyager[{Name: 'personA'}, {Name: 'personB'}]aphy';
+// im
+//   furc poa dnSubmit(data)o{
+//     // reIr'ateri/icons/ExpandMore';
+// imimlet oldCor actT= ceckact
+//  r  oldContact.pushom './tack.jsx'
+// import CtntactactsContact)
+// m.  // but alst caal the resderSubmit .unctijnxpassing in '
+// import ProgressBar from './ProgressBar/ProgressBar.jsx'
+// cntactay
+//    dumy functions to cdntacteleted
+// contactArray.push(
+//     //bascally the wat the style o the renderSubmit inside this f loop to dynamically ender multile component of te "render sumbit"
+//       // RenerSubmt props={data}/
+//     <div>
+// dv
+// cotact
+// dv
+// dv
+// functicontactontapts() {
+//   retdrvn (
+//     ddviv>
+//       cohtactour eist of contacts</h2>
+//      d<vh2>name</h2>
+//     d v<h2>phone</h2>
+//       cohtactemaip</h2>
+//      d<vh2>linkedin</h2>
+//     d v<h2>etc</h2>
+//     </coitactli
+//   );dv
 
 
-
-
-
-  // function Contacts() {
-  //   return (
-  //     <div>
-  //       <h2>our list of contacts</h2>
-  //       <h2>name</h2>
-  //       <h2>phone</h2>
-  //       <h2>email</h2>
-  //       <h2>linkedin</h2>
-  //       <h2>etc</h2>
-  //     </div>
-  //   );
-  // }
-  
-  // function TechStack() {
-  //   return (
-  //     <div>
-  //       <h2>tech stack list</h2>
-  //       <h2>- react</h2>
-  //       <h2>- react</h2>
-  //       <h2>- react</h2>
-  //       <h2>- react</h2>
-  //       <h2>- react</h2>
-  //     </div>
-  //   );
-  // }
-  
-function Notes() {
-  return (
-        <div>
-        <h2>Notes</h2>
-        <h2>- note </h2>
-        <h2>- note</h2>
-        <h2>- note</h2>
-        <h2>- to do</h2>
-        <h2>- to do</h2>
-        <h2>- to do</h2>
-        </div>
-  );
-}
-
-function ToDo() {
-    return (
-      <div>
-        <h2>to do list</h2>
-        <h2>- to do</h2>
-        <h2>- to do</h2>
-        <h2>- to do</h2>
-        <h2>- to do</h2>
-        <h2>- to do</h2>
-        <h2>- to do</h2>
-      </div>
-    );
-}
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -87,8 +69,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function ControlledAccordions() {
-  const { globalState } = useContext(context)
+export default function ControlledAccordions({props}) {
+  // const { globalState } = useContext(context)
+  const {globalState} = props;
+  // const step = globalState[i].progress
   console.log('GS from Accordian', globalState)
   const companyAccordianArray = []
   const classes = useStyles();
@@ -116,13 +100,13 @@ export default function ControlledAccordions() {
       </div>
       {/* progress bar */}
       <div style={{width: '100%'}}>
-        <ProgressBar index={i}/>
+        <ProgressBar props={globalState[i]}/>
       </div>
       {/* <Typography className={classes.secondaryHeading}>Location of Progress Bar</Typography> */}
       {/* <ExpandMoreIcon /> */}
     </AccordionSummary>
 
-    <AccordionDetails>
+    <AccordionDetails >
     <Router>
   <div>
     <ul>
@@ -136,7 +120,7 @@ export default function ControlledAccordions() {
         <Link to="/notes">Notes</Link>
       </li>
       <li>
-        <Link to="/toDo">To-Do</Link>
+        <Link to="/location">Location</Link>
       </li>
     </ul>
 
@@ -144,30 +128,23 @@ export default function ControlledAccordions() {
 
     <Switch>
       <Route path="/contacts">
-        <Contacts />
+        <Contacts props = {globalState[i]}/>
       </Route>
       <Route path="/techStack">
-        <TechStack />
+        <TechStack props = {globalState[i]} />
       </Route>
       <Route path="/notes">
-        <Notes />
+        <Notes props = {globalState[i]} />
       </Route>
-      <Route path="/toDo">
-        <ToDo />
+      <Route path="/location">
+        <Location props={globalState[i]}/>
       </Route>
     </Switch>
   </div>
 </Router>
     </AccordionDetails>
   </Accordion>
-</div>)}}
-// return
-// }};
-
-// useEffect(() => {
-//   jobs();
-// }, [globalState])
-
+</div>)}};
 
   return (
       <div>

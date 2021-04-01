@@ -1,4 +1,4 @@
-import React, { Component, useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 // import the progress bar
 import StepProgressBar from 'react-step-progress';
 // import the stylesheet
@@ -32,13 +32,16 @@ function onFormSubmit() {
 }
 
 // render the progress bar
-export default function ProgressBar () {
+export default function ProgressBar ({props}) {
   // const { globalState, setGlobalState } = useContext(context)
   // const [progress, setProgress] = useState(globalState[index][step])
+  const { progress } = props;
+
+  
   return(
     <div>
             <StepProgressBar
-            startingStep={0}
+            startingStep={progress}
             onSubmit={onFormSubmit}
             steps={[
               {
